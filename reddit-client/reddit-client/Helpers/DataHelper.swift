@@ -32,6 +32,10 @@ class DataHelper: NSObject {
         return container
     
     }()
+  
+    func viewContext() -> NSManagedObjectContext {
+        return self.persistentContainer.viewContext
+    }
     
     func newBackgroundContext() -> NSManagedObjectContext {
         return self.persistentContainer.newBackgroundContext()

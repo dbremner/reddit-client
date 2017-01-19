@@ -117,4 +117,9 @@ public class Link: NSManagedObject {
         
     }
     
+    func friendlySubmissionDate() -> String {
+        // TODO: implement this
+        return "XXX ago"
+    }
+    
 }

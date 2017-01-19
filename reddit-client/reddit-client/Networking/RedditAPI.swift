@@ -62,7 +62,7 @@ class RedditAPI: NSObject {
         
         DataHelper.sharedInstance.performBackgroundTask { (context: NSManagedObjectContext) in
             
-            Link.deleteAll(context: context)
+//            Link.deleteAll(context: context)
             
             if let data = response["data"] as? Payload {
             
