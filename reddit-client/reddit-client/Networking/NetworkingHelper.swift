@@ -9,6 +9,7 @@
 import UIKit
 
 typealias Payload = [String: AnyObject]
+typealias List = [Payload]
 
 class NetworkingHelper: NSObject {
 

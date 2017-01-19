@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 enum RedditAPITime: NSString {
     case hour = "hour"
@@ -24,9 +25,9 @@ class RedditAPI: NSObject {
     let baseURL = URL(string: "https://www.reddit.com")
     let pageLimit = 25
     
-    func top(after: String? = nil, count: Int = 0, time: RedditAPITime = .day, completionHandler: @escaping ((Array<Any>?, Error?) -> Void)) {
+    func top(after: String? = nil, count: Int = 0, time: RedditAPITime = .day, completionHandler: @escaping ((Error?) -> Void)) {
         
-        let url = baseURL!.appendingPathComponent("r/all/top.json")
+        let url = baseURL!.appendingPathComponent("top.json")
         
         var params = [String: String]()
         
@@ -39,10 +40,54 @@ class RedditAPI: NSObject {
         params["t"] = "\(time)"
         params["limit"] = "\(self.pageLimit)"
         
-        NetworkingHelper.executeGETOperation(url, params: params) { (payload: Payload?, error: Error?) in
+        NetworkingHelper.executeGETOperation(url, params: params) { (response: Payload?, error: Error?) in
             
-            print(payload ?? "there was some error")
+            if error != nil {
+    
+                completionHandler(error)
+    
+            } else {
             
+                self.processTop(response: response!, completionHandler: {
+                    
+                    completionHandler(nil)
+                    
+                })
+            }
+        }
+    }
+    
+    private func processTop(response: Payload, completionHandler: @escaping
+        ((Void) -> Void)) {
+        
+        DataHelper.sharedInstance.performBackgroundTask { (context: NSManagedObjectContext) in
+            
+            Link.deleteAll(context: context)
+            
+            if let data = response["data"] as? Payload {
+            
+                if let children = data["children"] as? List {
+            
+                    var index: Int32 = 1
+                    
+                    for child in children {
+                
+                        if let childData = child["data"] as? Payload {
+            
+                            let link = Link.create(withDictionary: childData, context: context)
+                            link.sort = index
+                            
+                            index += 1
+                        }
+                    }
+                }
+            }
+            
+            try! context.save()
+            
+            DispatchQueue.main.async {
+                completionHandler()
+            }
         }
     }
 }

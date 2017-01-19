@@ -11,10 +11,14 @@
 		E76446DB1E303DBF00FEF492 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E76446D41E303DBF00FEF492 /* Assets.xcassets */; };
 		E76446DC1E303DBF00FEF492 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E76446D51E303DBF00FEF492 /* LaunchScreen.storyboard */; };
 		E76446DD1E303DBF00FEF492 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E76446D71E303DBF00FEF492 /* Main.storyboard */; };
-		E76446DE1E303DBF00FEF492 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E76446D91E303DBF00FEF492 /* Info.plist */; };
 		E76446E01E303DE000FEF492 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76446DF1E303DE000FEF492 /* FeedViewController.swift */; };
 		E76446E31E30E70E00FEF492 /* RedditAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76446E21E30E70E00FEF492 /* RedditAPI.swift */; };
 		E76446E51E30E75100FEF492 /* NetworkingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76446E41E30E75100FEF492 /* NetworkingHelper.swift */; };
+		E76446E91E31224500FEF492 /* DataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76446E81E31224500FEF492 /* DataHelper.swift */; };
+		E764470F1E3123CA00FEF492 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E764470E1E3123CA00FEF492 /* CoreData.framework */; };
+		E76447121E31256900FEF492 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E76447101E31256900FEF492 /* Model.xcdatamodeld */; };
+		E76447151E312C3A00FEF492 /* Link+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76447131E312C3A00FEF492 /* Link+CoreDataClass.swift */; };
+		E76447161E312C3A00FEF492 /* Link+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76447141E312C3A00FEF492 /* Link+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +31,11 @@
 		E76446DF1E303DE000FEF492 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		E76446E21E30E70E00FEF492 /* RedditAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditAPI.swift; sourceTree = "<group>"; };
 		E76446E41E30E75100FEF492 /* NetworkingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingHelper.swift; sourceTree = "<group>"; };
+		E76446E81E31224500FEF492 /* DataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHelper.swift; sourceTree = "<group>"; };
+		E764470E1E3123CA00FEF492 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		E76447111E31256900FEF492 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		E76447131E312C3A00FEF492 /* Link+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Link+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E76447141E312C3A00FEF492 /* Link+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Link+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E764470F1E3123CA00FEF492 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,6 +55,7 @@
 			children = (
 				E76446BD1E303D5B00FEF492 /* reddit-client */,
 				E76446BC1E303D5B00FEF492 /* Products */,
+				E764470D1E3123C900FEF492 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -72,6 +83,7 @@
 		E76446D11E303DBF00FEF492 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				E76446E81E31224500FEF492 /* DataHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -79,6 +91,8 @@
 		E76446D21E303DBF00FEF492 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E76447131E312C3A00FEF492 /* Link+CoreDataClass.swift */,
+				E76447141E312C3A00FEF492 /* Link+CoreDataProperties.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -90,6 +104,7 @@
 				E76446D51E303DBF00FEF492 /* LaunchScreen.storyboard */,
 				E76446D71E303DBF00FEF492 /* Main.storyboard */,
 				E76446D91E303DBF00FEF492 /* Info.plist */,
+				E76447101E31256900FEF492 /* Model.xcdatamodeld */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -109,6 +124,14 @@
 				E76446E41E30E75100FEF492 /* NetworkingHelper.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		E764470D1E3123C900FEF492 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E764470E1E3123CA00FEF492 /* CoreData.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,7 +194,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E76446DE1E303DBF00FEF492 /* Info.plist in Resources */,
 				E76446DD1E303DBF00FEF492 /* Main.storyboard in Resources */,
 				E76446DB1E303DBF00FEF492 /* Assets.xcassets in Resources */,
 				E76446DC1E303DBF00FEF492 /* LaunchScreen.storyboard in Resources */,
@@ -186,9 +208,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E76446E01E303DE000FEF492 /* FeedViewController.swift in Sources */,
+				E76447161E312C3A00FEF492 /* Link+CoreDataProperties.swift in Sources */,
 				E76446E51E30E75100FEF492 /* NetworkingHelper.swift in Sources */,
 				E76446BF1E303D5B00FEF492 /* AppDelegate.swift in Sources */,
 				E76446E31E30E70E00FEF492 /* RedditAPI.swift in Sources */,
+				E76447151E312C3A00FEF492 /* Link+CoreDataClass.swift in Sources */,
+				E76446E91E31224500FEF492 /* DataHelper.swift in Sources */,
+				E76447121E31256900FEF492 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +381,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E76447101E31256900FEF492 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E76447111E31256900FEF492 /* Model.xcdatamodel */,
+			);
+			currentVersion = E76447111E31256900FEF492 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E76446B31E303D5B00FEF492 /* Project object */;
 }
