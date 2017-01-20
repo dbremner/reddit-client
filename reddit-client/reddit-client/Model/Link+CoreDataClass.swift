@@ -76,13 +76,13 @@ public class Link: NSManagedObject {
         if let title = dictionary["title"] as? String {
             self.title = title
         } else {
-            self.title = ""
+            self.title = nil
         }
         
         if let author = dictionary["author"] as? String {
             self.author = author
         } else {
-            self.author = ""
+            self.author = nil
         }
         
         if let commentsCount = dictionary["num_comments"] as? Int64 {
@@ -100,20 +100,28 @@ public class Link: NSManagedObject {
         if let identifier = dictionary["name"] as? String {
             self.identifier = identifier
         } else {
-            self.identifier = ""
+            self.identifier = nil
         }
         
         if let thumbnail = dictionary["thumbnail"] as? String {
-            self.thumbnail = thumbnail
+            self.thumbnail = (thumbnail.hasPrefix("http") ? thumbnail : nil)
         } else {
-            self.thumbnail = ""
+            self.thumbnail = nil
         }
         
         if let url = dictionary["url"] as? String {
             self.url = url
         } else {
-            self.url = ""
+            self.url = nil
         }
         
+    }
+    
+    func hasThumbnail() -> Bool {
+        if let thumbnail = self.thumbnail {
+            return !thumbnail.isEmpty
+        } else {
+            return false;
+        }
     }
 }
