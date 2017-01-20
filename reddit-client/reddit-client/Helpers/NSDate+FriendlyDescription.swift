@@ -34,7 +34,7 @@ extension NSDate {
         }
         else
         {
-            let minutesAgo = round(timeInterval / secondsPerMinute);
+            let minutesAgo = floor(timeInterval / secondsPerMinute);
             
             if (minutesAgo < minutesPerHour)
             {
@@ -44,7 +44,7 @@ extension NSDate {
             }
             else
             {
-                let hoursAgo = round(minutesAgo / minutesPerHour);
+                let hoursAgo = floor(minutesAgo / minutesPerHour);
                 
                 if (hoursAgo < hoursPerDay)
                 {
@@ -55,7 +55,7 @@ extension NSDate {
                 }
                 else
                 {
-                    let daysAgo = round(hoursAgo / hoursPerDay);
+                    let daysAgo = floor(hoursAgo / hoursPerDay);
                     
                     if (daysAgo < daysPerMonth)
                     {
@@ -65,7 +65,7 @@ extension NSDate {
                     }
                     else
                     {
-                        let monthsAgo = round(daysAgo / daysPerMonth);
+                        let monthsAgo = floor(daysAgo / daysPerMonth);
                         
                         if (monthsAgo < monthsPerYear)
                         {
@@ -75,10 +75,10 @@ extension NSDate {
                         }
                         else
                         {
-                            let yearsAgo = round(monthsAgo / monthsPerYear);
+                            let yearsAgo = floor(monthsAgo / monthsPerYear);
                             
                             description = (yearsAgo == 1 ?
-                               String(format: "%.0f year ago", yearsAgo) :
+                                String(format: "%.0f year ago", yearsAgo) :
                                 String(format: "%.0f years ago", yearsAgo));
                         }
                     }

@@ -12,7 +12,8 @@ import CoreData
 @objc(Link)
 public class Link: NSManagedObject {
     
-    static func create(withDictionary dictionary: Payload, context: NSManagedObjectContext) -> Link {
+    @discardableResult static func create(withDictionary dictionary: Payload,
+                                          context: NSManagedObjectContext) -> Link {
         
         let linkIdentifier = Link.identifier(fromDictionary: dictionary)
         
@@ -27,7 +28,8 @@ public class Link: NSManagedObject {
         return link!
     }
     
-    static func find(withIdentifier identifier: String, context: NSManagedObjectContext) -> Link? {
+    static func find(withIdentifier identifier: String,
+                     context: NSManagedObjectContext) -> Link? {
         
         let request: NSFetchRequest<Link> = Link.fetchRequest()
         request.predicate = NSPredicate(format: "identifier == %@", identifier)
@@ -91,7 +93,7 @@ public class Link: NSManagedObject {
             self.commentsCount = 0
         }
         
-        if let created = dictionary["created"] as? TimeInterval {
+        if let created = dictionary["created_utc"] as? TimeInterval {
             self.createdAt = NSDate(timeIntervalSince1970: created)
         } else {
             self.createdAt = nil
@@ -114,7 +116,6 @@ public class Link: NSManagedObject {
         } else {
             self.url = nil
         }
-        
     }
     
     func hasThumbnail() -> Bool {
