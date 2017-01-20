@@ -21,6 +21,7 @@
 		E7E4A5C11E3160EF002D7DB3 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E4A5C01E3160EF002D7DB3 /* FeedViewController.swift */; };
 		E7E4A5C31E31610E002D7DB3 /* LinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E4A5C21E31610E002D7DB3 /* LinkCell.swift */; };
 		E7E4A5C91E317137002D7DB3 /* RemoteImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E4A5C81E317137002D7DB3 /* RemoteImageView.swift */; };
+		E7E4A5CD1E317FD5002D7DB3 /* NSDate+FriendlyDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E4A5CC1E317FD5002D7DB3 /* NSDate+FriendlyDescription.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		E7E4A5C01E3160EF002D7DB3 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		E7E4A5C21E31610E002D7DB3 /* LinkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkCell.swift; sourceTree = "<group>"; };
 		E7E4A5C81E317137002D7DB3 /* RemoteImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteImageView.swift; sourceTree = "<group>"; };
+		E7E4A5CC1E317FD5002D7DB3 /* NSDate+FriendlyDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+FriendlyDescription.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 		E76446D11E303DBF00FEF492 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				E7E4A5CC1E317FD5002D7DB3 /* NSDate+FriendlyDescription.swift */,
 				E76446E81E31224500FEF492 /* DataHelper.swift */,
 				E7E4A5C81E317137002D7DB3 /* RemoteImageView.swift */,
 			);
@@ -221,6 +224,7 @@
 				E7E4A5C31E31610E002D7DB3 /* LinkCell.swift in Sources */,
 				E76446E91E31224500FEF492 /* DataHelper.swift in Sources */,
 				E7E4A5C11E3160EF002D7DB3 /* FeedViewController.swift in Sources */,
+				E7E4A5CD1E317FD5002D7DB3 /* NSDate+FriendlyDescription.swift in Sources */,
 				E7E4A5C91E317137002D7DB3 /* RemoteImageView.swift in Sources */,
 				E76447121E31256900FEF492 /* Model.xcdatamodeld in Sources */,
 			);

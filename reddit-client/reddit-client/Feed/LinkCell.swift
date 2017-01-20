@@ -33,9 +33,9 @@ class LinkCell: UITableViewCell {
         self.titleLabel.text = link.title ?? ""
         
         if let author = link.author {
-            self.detailsLabel.text = "submitted \(link.friendlySubmissionDate()) by \(author)"
+            self.detailsLabel.text = "submitted \(link.createdAt!.friendlyDescription()) by \(author)"
         } else {
-            self.detailsLabel.text = "submitted \(link.friendlySubmissionDate())"
+            self.detailsLabel.text = "submitted \(link.createdAt!.friendlyDescription())"
         }
     }
     
