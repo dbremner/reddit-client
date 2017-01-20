@@ -25,13 +25,24 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
         super.viewWillAppear(animated)
     }
     
+    func handleRefresh(refreshControl: UIRefreshControl) {
+        self.requestFirstPage()
+    }
+    
     // MARK: - Data
     
     func requestFirstPage() {
+        
         self.loadMoreView.setLoadingMode(true)
         
         RedditAPI.sharedInstance.top { (error: Error?) in
+         
             self.loadMoreView.setLoadingMode(false)
+            
+            if let refreshControl = self.refreshControl {
+                refreshControl.endRefreshing()
+            }
+            
             if let error = error {
                 UIAlertController.presentAlert(withError: error,
                                                overViewController: self)
@@ -40,6 +51,7 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
     }
     
     func requestNextPage() {
+        
         self.loadMoreView.setLoadingMode(true)
         
         RedditAPI.sharedInstance.nextPage { (error: Error?) in
@@ -51,14 +63,20 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
         }
     }
     
+  
     // MARK: - Table view
     
     func setupTableView() {
+        
         self.tableView.tableFooterView = self.loadMoreView
         
         self.loadMoreView.loadNextPageHandler = {
             self.requestNextPage()
         }
+        
+        self.refreshControl?.addTarget(self,
+                                       action: #selector(FeedViewController.handleRefresh(refreshControl:)),
+                                       for: UIControlEvents.valueChanged)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

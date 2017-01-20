@@ -145,6 +145,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="a1i-Ye-gaH"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="NK9-La-bWX">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                     <connections>
                         <outlet property="loadMoreView" destination="1UT-U5-Vt3" id="ilB-Mw-0y8"/>
                     </connections>
