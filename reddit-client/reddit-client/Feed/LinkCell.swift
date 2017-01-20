@@ -10,7 +10,7 @@ import UIKit
 
 class LinkCell: UITableViewCell {
 
-    @IBOutlet weak var thumbnailImageView: UIImageView!
+    @IBOutlet weak var thumbnailImageView: UIRemoteImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var detailsLabel: UILabel!
     @IBOutlet weak var commentsLabel: UILabel!
@@ -48,9 +48,12 @@ class LinkCell: UITableViewCell {
         if link.hasThumbnail() {
             self.thumbnailImageView.isHidden = false
             self.titleLabelLeadingConstraint.constant = LinkCell.thumbnailWidth + 2 * LinkCell.padding
+            let url = URL(string: link.thumbnail!)!
+            self.thumbnailImageView.setContent(url: url)
         } else {
             self.thumbnailImageView.isHidden = true
             self.titleLabelLeadingConstraint.constant = LinkCell.padding
+            self.thumbnailImageView.setContent(url: nil)
         }
     }
     

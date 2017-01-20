@@ -13,15 +13,20 @@ typealias List = [Payload]
 
 class NetworkingHelper: NSObject {
 
-    static func executeGETOperation(_ url: URL, params: [String: String], completionHandler: @escaping ((Payload?, Error?) -> Void)) {
+    static let sharedInstance: NetworkingHelper = NetworkingHelper()
+    lazy var sharedSession = URLSession.shared
+
+    // MARK: - GET
     
-        let url = appendParams(url: url, params: params)
-   
-        print(url)
-        
+    func executeGETOperation(_ url: URL,
+                             params: [String: String],
+                             completionHandler: @escaping ((Payload?, Error?) -> Void)) {
+    
+        let url = NetworkingHelper.appendParams(url: url, params: params)
+       
         let request = URLRequest(url: url)
         
-        let dataTask = URLSession.shared.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
+        let dataTask = self.sharedSession.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
             
             if error != nil {
                 completionHandler(nil, error)
@@ -44,13 +49,8 @@ class NetworkingHelper: NSObject {
         dataTask.resume()
     }
     
-    static func executeDownloadContentOperation(_ URL: NSURL) {
-    
-    }
-    
-    // MARK: - Helper functions
-    
-    private static func appendParams(url: URL, params: [String: String]) -> URL {
+    private static func appendParams(url: URL,
+                                     params: [String: String]) -> URL {
         
         if params.count == 0 {
             return url
@@ -71,4 +71,18 @@ class NetworkingHelper: NSObject {
             return urlComponents.url!
         }
     }
+    
+    // MARK: - Download
+    
+    func executeDownloadContent(atUrl url: URL,
+                                saveAtUrl: URL,
+                                completionHandler: @escaping (URL, URL?, Error?) -> Void) {
+        
+        let downloadTask = self.sharedSession.downloadTask(with: url) { (downloadedUrl: URL?, response: URLResponse?, error: Error?) in
+            completionHandler(url, downloadedUrl, error)
+        }
+        
+        downloadTask.resume()
+    }
+
 }

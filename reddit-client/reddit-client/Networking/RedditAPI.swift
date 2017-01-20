@@ -40,7 +40,7 @@ class RedditAPI: NSObject {
         params["t"] = "\(time)"
         params["limit"] = "\(self.pageLimit)"
         
-        NetworkingHelper.executeGETOperation(url, params: params) { (response: Payload?, error: Error?) in
+        NetworkingHelper.sharedInstance.executeGETOperation(url, params: params) { (response: Payload?, error: Error?) in
             
             if error != nil {
     
