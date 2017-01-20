@@ -31,11 +31,9 @@ class RedditAPI: NSObject {
              completionHandler: @escaping ((Error?) -> Void)) {
         
         let url = baseURL!.appendingPathComponent("top.json")
-        
         var params = [String: String]()
         
-        if let after = after
-        {
+        if let after = after {
             params["after"] = after
         }
         
@@ -45,43 +43,53 @@ class RedditAPI: NSObject {
         params["raw_json"] = "1"
         params["sort"] = "top"
         
-        NetworkingHelper.sharedInstance.executeGETOperation(url, params: params) { (response: Payload?, error: Error?) in
-            
+        NetworkingHelper.sharedInstance.executeGETOperation(url,
+                                                            params: params) { (response: Payload?, error: Error?) in
             if error != nil {
-    
                 completionHandler(error)
-    
             } else {
-            
-                self.processTop(response: response!, completionHandler: {
-                    
+                self.processLinksResponse(response: response!,
+                                          resetLocalData: (after == nil),
+                                          completionHandler: {
                     completionHandler(nil)
-                    
                 })
             }
         }
     }
     
-    private func processTop(response: Payload,
-                            completionHandler: @escaping
-        ((Void) -> Void)) {
+    func nextPage(completionHandler: @escaping ((Error?) -> Void)) {
+      
+        let context = DataHelper.sharedInstance.viewContext()
+        let link = Link.last(context: context)
+        let count = Link.count(context: context)
+        
+        self.top(after: link.identifier,
+                 count: count,
+                 completionHandler: completionHandler)
+    }
+    
+    private func processLinksResponse(response: Payload,
+                                      resetLocalData: Bool,
+                                      completionHandler: @escaping ((Void) -> Void)) {
         
         DataHelper.sharedInstance.performBackgroundTask { (context: NSManagedObjectContext) in
             
-            Link.deleteAll(context: context)
+            if resetLocalData {
+                Link.deleteAll(context: context)
+            }
             
             if let data = response["data"] as? Payload {
             
                 if let children = data["children"] as? List {
             
-                    var sortValue: Int32 = 1
+                    var sortValue: Int = Link.count(context: context)
                     
                     for child in children {
                 
                         if let childData = child["data"] as? Payload {
                             let link = Link.create(withDictionary: childData,
                                                    context: context)
-                            link.sortValue = sortValue
+                            link.sortValue = Int32(sortValue)
                             sortValue += 1
                         }
                     }

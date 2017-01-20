@@ -16,15 +16,13 @@ public class Link: NSManagedObject {
                                           context: NSManagedObjectContext) -> Link {
         
         let linkIdentifier = Link.identifier(fromDictionary: dictionary)
-        
         var link = Link.find(withIdentifier: linkIdentifier, context: context)
-     
+
         if link == nil {
             link = Link(context: context)
         }
-        
+
         link?.update(withIdentifier: dictionary)
-        
         return link!
     }
     
@@ -37,16 +35,51 @@ public class Link: NSManagedObject {
         var searchResults: Array<Link>?
         
         context.performAndWait {
-            
             do {
                 searchResults = try context.fetch(request)
             } catch {
                 fatalError("Error with request: \(error)")
             }
-            
         }
         
         return searchResults?.first
+    }
+    
+    static func count(context: NSManagedObjectContext) -> Int {
+        
+        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Link")
+        var count: Int = 0
+        request.resultType = NSFetchRequestResultType.countResultType
+
+        context.performAndWait {
+            do {
+                count = try context.count(for: request)
+            } catch {
+                fatalError("Error with request: \(error)")
+            }
+        }
+        
+        return count
+    }
+    
+    static func last(context: NSManagedObjectContext) -> Link {
+        
+        let request: NSFetchRequest<Link> = Link.fetchRequest()
+        
+        request.fetchLimit = 1
+        request.sortDescriptors = [NSSortDescriptor(key: "sortValue", ascending: false)]
+        
+        var searchResults: Array<Link>?
+        
+        context.performAndWait {
+            do {
+                searchResults = try context.fetch(request)
+            } catch {
+                fatalError("Error with request: \(error)")
+            }
+        }
+        
+        return (searchResults?.first)!
     }
     
     static func deleteAll(context: NSManagedObjectContext) {
@@ -55,7 +88,6 @@ public class Link: NSManagedObject {
         var searchResults: Array<Link>?
         
         context.performAndWait {
-            
             do {
                 searchResults = try context.fetch(request)
                 

@@ -13,15 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-     
-        RedditAPI.sharedInstance.top { (error: Error?) in
-            
-            print("call completed")
-            
-        }
-        
         return true
     }
 
@@ -30,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        DataHelper.sharedInstance.save()
 
     }
 

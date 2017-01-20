@@ -11,46 +11,77 @@ import CoreData
 
 class FeedViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
+    @IBOutlet weak var loadMoreView: LoadMoreView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.setupTableView()
+        self.requestFirstPage()
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        
-        
         self.clearsSelectionOnViewWillAppear = true
-  
         super.viewWillAppear(animated)
+    }
+    
+    // MARK: - Data
+    
+    func requestFirstPage() {
+        self.loadMoreView.setLoadingMode(true)
+        
+        RedditAPI.sharedInstance.top { (error: Error?) in
+            self.loadMoreView.setLoadingMode(false)
+            if let error = error {
+                UIAlertController.presentAlert(withError: error,
+                                               overViewController: self)
+            }
+        }
+    }
+    
+    func requestNextPage() {
+        self.loadMoreView.setLoadingMode(true)
+        
+        RedditAPI.sharedInstance.nextPage { (error: Error?) in
+            self.loadMoreView.setLoadingMode(false)
+            if let error = error {
+                UIAlertController.presentAlert(withError: error,
+                                               overViewController: self)
+            }
+        }
     }
     
     // MARK: - Table view
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func setupTableView() {
+        self.tableView.tableFooterView = self.loadMoreView
         
-        return self.fetchedResultsController.sections?.count ?? 0
-    
+        self.loadMoreView.loadNextPageHandler = {
+            self.requestNextPage()
+        }
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return self.fetchedResultsController.sections?.count ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView,
+                            numberOfRowsInSection section: Int) -> Int {
         let sectionInfo = self.fetchedResultsController.sections![section]
         return sectionInfo.numberOfObjects
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LinkCell", for: indexPath) as! LinkCell
-        
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LinkCell",
+                                                 for: indexPath) as! LinkCell
         let link = self.fetchedResultsController.object(at: indexPath)
-        
         cell.update(withLink: link)
-      
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+    override func tableView(_ tableView: UITableView,
+                            heightForRowAt indexPath: IndexPath) -> CGFloat {
         let link = self.fetchedResultsController.object(at: indexPath)
         return LinkCell.neededHeight(forLink: link)
     }
@@ -77,11 +108,8 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
         _fetchedResultsController = fetchedResultsController
         
         do {
-        
             try _fetchedResultsController!.performFetch()
-        
         } catch {
-       
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }

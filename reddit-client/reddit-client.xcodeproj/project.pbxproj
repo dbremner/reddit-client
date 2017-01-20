@@ -24,6 +24,8 @@
 		E7E4A5D01E32604F002D7DB3 /* UIRemoteImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E4A5CF1E32604F002D7DB3 /* UIRemoteImageView.swift */; };
 		E7E4A5D71E326722002D7DB3 /* URL+md5Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E4A5D61E326722002D7DB3 /* URL+md5Hash.swift */; };
 		E7E4A5D91E3269FA002D7DB3 /* FileSystemHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E4A5D81E3269FA002D7DB3 /* FileSystemHelper.swift */; };
+		E7E4A5DB1E32B4CF002D7DB3 /* LoadMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E4A5DA1E32B4CF002D7DB3 /* LoadMoreView.swift */; };
+		E7E4A5DD1E32B917002D7DB3 /* UIAlertController+Simplified.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E4A5DC1E32B917002D7DB3 /* UIAlertController+Simplified.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,8 @@
 		E7E4A5D31E326690002D7DB3 /* reddit-client-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "reddit-client-Bridging-Header.h"; sourceTree = "<group>"; };
 		E7E4A5D61E326722002D7DB3 /* URL+md5Hash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+md5Hash.swift"; sourceTree = "<group>"; };
 		E7E4A5D81E3269FA002D7DB3 /* FileSystemHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystemHelper.swift; sourceTree = "<group>"; };
+		E7E4A5DA1E32B4CF002D7DB3 /* LoadMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreView.swift; sourceTree = "<group>"; };
+		E7E4A5DC1E32B917002D7DB3 /* UIAlertController+Simplified.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Simplified.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,7 @@
 				E7E4A5CC1E317FD5002D7DB3 /* NSDate+FriendlyDescription.swift */,
 				E76446E81E31224500FEF492 /* DataHelper.swift */,
 				E7E4A5D81E3269FA002D7DB3 /* FileSystemHelper.swift */,
+				E7E4A5DC1E32B917002D7DB3 /* UIAlertController+Simplified.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -147,6 +152,7 @@
 			children = (
 				E7E4A5C01E3160EF002D7DB3 /* FeedViewController.swift */,
 				E7E4A5C21E31610E002D7DB3 /* LinkCell.swift */,
+				E7E4A5DA1E32B4CF002D7DB3 /* LoadMoreView.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -237,7 +243,9 @@
 				E76446E91E31224500FEF492 /* DataHelper.swift in Sources */,
 				E7E4A5C11E3160EF002D7DB3 /* FeedViewController.swift in Sources */,
 				E7E4A5CD1E317FD5002D7DB3 /* NSDate+FriendlyDescription.swift in Sources */,
+				E7E4A5DD1E32B917002D7DB3 /* UIAlertController+Simplified.swift in Sources */,
 				E76447121E31256900FEF492 /* Model.xcdatamodeld in Sources */,
+				E7E4A5DB1E32B4CF002D7DB3 /* LoadMoreView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

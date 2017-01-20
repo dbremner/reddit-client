@@ -24,6 +24,8 @@ class NetworkingHelper: NSObject {
     
         let url = NetworkingHelper.appendParams(url: url, params: params)
        
+        print("GET: \(url)")
+        
         let request = URLRequest(url: url)
         
         let dataTask = self.sharedSession.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in

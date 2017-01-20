@@ -56,7 +56,7 @@ class UIRemoteImageView: UIImageView {
         }
     }
     
-    // Mark: - Cache
+    // MARK: - Cache
     
     private func cachedImage(forRemoteUrl url: URL) -> UIImage? {
         let localUrl = self.localCachedImageUrl(forRemoteUrl: url)
@@ -76,7 +76,7 @@ class UIRemoteImageView: UIImageView {
     
  
     
-    // Mark: - States
+    // MARK: - States
     
     private func cleanCurrentConfiguration() {
         self.currentContentURL = nil

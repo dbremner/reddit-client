@@ -93,7 +93,7 @@ class LinkCell: UITableViewCell {
                                                      options: options,
                                                      context: nil)
  
-        let height = ceil(titleRect.height) + detailsHeight + commentsCountHeight + 2 * padding + 2 * veritcalSpace + contentViewPadding
+        let height = ceil(titleRect.height) + detailsHeight + commentsCountHeight + padding + 3 * veritcalSpace + contentViewPadding
         
         return (height < minHeight ? minHeight : height)
     }

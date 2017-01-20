@@ -35,6 +35,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="1UT-U5-Vt3" customClass="LoadMoreView" customModule="reddit_client" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="108" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="lNf-ct-BVS">
+                                    <rect key="frame" x="150" y="12" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="Aom-VZ-VpZ"/>
+                                        <constraint firstAttribute="height" constant="20" id="dhx-B0-MuT"/>
+                                    </constraints>
+                                </activityIndicatorView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baw-PC-JAD">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                    <state key="normal" title="TAP TO LOAD MORE">
+                                        <color key="titleColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="buttonTouchedWithSender:" destination="1UT-U5-Vt3" eventType="touchUpInside" id="YiT-3a-1rs"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="baw-PC-JAD" secondAttribute="bottom" id="CcE-NC-tXE"/>
+                                <constraint firstItem="baw-PC-JAD" firstAttribute="leading" secondItem="1UT-U5-Vt3" secondAttribute="leading" id="Mm5-Aq-mSI"/>
+                                <constraint firstItem="baw-PC-JAD" firstAttribute="top" secondItem="1UT-U5-Vt3" secondAttribute="top" id="gtg-2P-z2R"/>
+                                <constraint firstItem="lNf-ct-BVS" firstAttribute="centerX" secondItem="1UT-U5-Vt3" secondAttribute="centerX" id="hCd-MZ-dn3"/>
+                                <constraint firstAttribute="trailing" secondItem="baw-PC-JAD" secondAttribute="trailing" id="jdL-td-4Ma"/>
+                                <constraint firstItem="lNf-ct-BVS" firstAttribute="centerY" secondItem="1UT-U5-Vt3" secondAttribute="centerY" id="rRv-my-hBg"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="button" destination="baw-PC-JAD" id="ytx-Yv-FIq"/>
+                                <outlet property="spinner" destination="lNf-ct-BVS" id="cwC-yO-ub0"/>
+                            </connections>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LinkCell" id="0IJ-pZ-MBZ" customClass="LinkCell" customModule="reddit_client" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="80"/>
@@ -52,7 +88,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a large title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="233" translatesAutoresizingMaskIntoConstraints="NO" id="6Qn-tG-fRq">
-                                            <rect key="frame" x="79" y="8" width="233" height="23.5"/>
+                                            <rect key="frame" x="79" y="4" width="233" height="27.5"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>
@@ -82,7 +118,7 @@
                                     <constraints>
                                         <constraint firstItem="482-ob-5Uv" firstAttribute="leading" secondItem="jzc-k9-a9x" secondAttribute="leading" constant="8" id="01s-Nt-9WV"/>
                                         <constraint firstItem="6Qn-tG-fRq" firstAttribute="leading" secondItem="jzc-k9-a9x" secondAttribute="leading" constant="79" id="89r-B8-bx9"/>
-                                        <constraint firstItem="6Qn-tG-fRq" firstAttribute="top" secondItem="jzc-k9-a9x" secondAttribute="top" constant="8" id="Cqe-Uu-Y65"/>
+                                        <constraint firstItem="6Qn-tG-fRq" firstAttribute="top" secondItem="jzc-k9-a9x" secondAttribute="top" constant="4" id="Cqe-Uu-Y65"/>
                                         <constraint firstAttribute="bottom" secondItem="sse-2K-uau" secondAttribute="bottom" constant="8" id="Kid-w1-1O1"/>
                                         <constraint firstAttribute="trailing" secondItem="sse-2K-uau" secondAttribute="trailing" constant="8" id="OYO-mL-9Vx"/>
                                         <constraint firstItem="sse-2K-uau" firstAttribute="width" secondItem="6Qn-tG-fRq" secondAttribute="width" id="VHz-4j-Nsc"/>
@@ -109,10 +145,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="a1i-Ye-gaH"/>
+                    <connections>
+                        <outlet property="loadMoreView" destination="1UT-U5-Vt3" id="ilB-Mw-0y8"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1U3-4o-el7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="552.79999999999995" y="187.55622188905548"/>
+            <point key="canvasLocation" x="551.25" y="186.97183098591549"/>
         </scene>
     </scenes>
 </document>
