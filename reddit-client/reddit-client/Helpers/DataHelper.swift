@@ -29,6 +29,8 @@ class DataHelper: NSObject {
             
         })
         
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        
         return container
     
     }()

@@ -25,7 +25,10 @@ class RedditAPI: NSObject {
     let baseURL = URL(string: "https://www.reddit.com")
     let pageLimit = 25
     
-    func top(after: String? = nil, count: Int = 0, time: RedditAPITime = .day, completionHandler: @escaping ((Error?) -> Void)) {
+    func top(after: String? = nil,
+             count: Int = 0,
+             time: RedditAPITime = .day,
+             completionHandler: @escaping ((Error?) -> Void)) {
         
         let url = baseURL!.appendingPathComponent("top.json")
         
@@ -39,6 +42,8 @@ class RedditAPI: NSObject {
         params["count"] = "\(count)"
         params["t"] = "\(time)"
         params["limit"] = "\(self.pageLimit)"
+        params["raw_json"] = "1"
+        params["sort"] = "top"
         
         NetworkingHelper.sharedInstance.executeGETOperation(url, params: params) { (response: Payload?, error: Error?) in
             
@@ -57,27 +62,27 @@ class RedditAPI: NSObject {
         }
     }
     
-    private func processTop(response: Payload, completionHandler: @escaping
+    private func processTop(response: Payload,
+                            completionHandler: @escaping
         ((Void) -> Void)) {
         
         DataHelper.sharedInstance.performBackgroundTask { (context: NSManagedObjectContext) in
             
-//            Link.deleteAll(context: context)
+            Link.deleteAll(context: context)
             
             if let data = response["data"] as? Payload {
             
                 if let children = data["children"] as? List {
             
-                    var index: Int32 = 1
+                    var sortValue: Int32 = 1
                     
                     for child in children {
                 
                         if let childData = child["data"] as? Payload {
-            
-                            let link = Link.create(withDictionary: childData, context: context)
-                            link.sort = index
-                            
-                            index += 1
+                            let link = Link.create(withDictionary: childData,
+                                                   context: context)
+                            link.sortValue = sortValue
+                            sortValue += 1
                         }
                     }
                 }

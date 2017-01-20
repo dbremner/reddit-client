@@ -65,8 +65,8 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
         
         let fetchRequest: NSFetchRequest<Link> = Link.fetchRequest()
         
-//        fetchRequest.fetchBatchSize = 20
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: true)]
+        fetchRequest.fetchBatchSize = 20
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sortValue", ascending: true)]
        
         let context = DataHelper.sharedInstance.viewContext()
         
@@ -92,9 +92,7 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
     var _fetchedResultsController: NSFetchedResultsController<Link>? = nil
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        
         self.tableView.beginUpdates()
-    
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
@@ -136,9 +134,7 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        
         self.tableView.endUpdates()
-    
     }
 
 }

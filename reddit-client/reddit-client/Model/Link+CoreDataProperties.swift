@@ -23,6 +23,6 @@ extension Link {
     @NSManaged public var thumbnail: String?
     @NSManaged public var title: String?
     @NSManaged public var url: String?
-    @NSManaged public var sort: Int32
+    @NSManaged public var sortValue: Int32
 
 }
