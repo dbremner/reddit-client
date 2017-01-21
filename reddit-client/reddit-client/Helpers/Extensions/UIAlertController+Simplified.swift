@@ -21,7 +21,6 @@ extension UIAlertController {
         let okButton = UIAlertAction(title: "OK",
                                      style: .cancel,
                                      handler: nil)
-        
         alertController.addAction(okButton)
         
         vc.present(alertController, animated: true, completion: nil)

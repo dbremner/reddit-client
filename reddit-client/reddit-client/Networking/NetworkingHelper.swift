@@ -90,5 +90,4 @@ class NetworkingHelper: NSObject {
         
         downloadTask.resume()
     }
-
 }

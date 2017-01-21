@@ -116,6 +116,16 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
                                        for: UIControlEvents.valueChanged)
     }
     
+    func refreshTableViewFooter() {
+        
+        let context = DataHelper.sharedInstance.viewContext()
+        if Link.isEmpty(context: context) {
+            self.tableView.tableFooterView = nil
+        } else {
+            self.tableView.tableFooterView = self.loadMoreView
+        }
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return self.fetchedResultsController.sections?.count ?? 0
     }
@@ -128,6 +138,7 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
     
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "LinkCell",
                                                  for: indexPath) as! LinkCell
         let link = self.fetchedResultsController.object(at: indexPath)
@@ -144,15 +155,6 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let link = self.fetchedResultsController.object(at: indexPath)
         self.showDatilsViewController(forLink: link)
-    }
-    
-    func refreshTableViewFooter() {
-        let context = DataHelper.sharedInstance.viewContext()
-        if Link.isEmpty(context: context) {
-            self.tableView.tableFooterView = nil
-        } else {
-            self.tableView.tableFooterView = self.loadMoreView
-        }
     }
     
     // MARK: - Fetched results controller
@@ -195,7 +197,6 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         
         switch type {
-            
         case .insert:
             self.tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
         
@@ -204,7 +205,6 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
         
         default:
             return
-        
         }
         
     }
@@ -212,7 +212,6 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
        
         switch type {
-        
         case .insert:
             tableView.insertRows(at: [newIndexPath!], with: .fade)
         
@@ -227,7 +226,6 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
             
         case .move:
             tableView.moveRow(at: indexPath!, to: newIndexPath!)
-        
         }
     }
     

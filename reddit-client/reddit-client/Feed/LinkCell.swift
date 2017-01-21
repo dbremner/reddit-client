@@ -41,6 +41,7 @@ class LinkCell: UITableViewCell {
     }
 
     func update(withLink link: Link) {
+        
         self.titleLabel.text = LinkCell.titleText(forLink: link)
         self.detailsLabel.text = LinkCell.detailsText(forLink: link)
         self.commentsLabel.text = LinkCell.commentsCountText(forLink: link)
@@ -62,6 +63,7 @@ class LinkCell: UITableViewCell {
     }
     
     static func detailsText(forLink link: Link) -> String {
+        
         if let author = link.author {
             return "\(link.createdAt!.friendlyDescription()) by \(author)"
         } else {
@@ -70,6 +72,7 @@ class LinkCell: UITableViewCell {
     }
     
     static func commentsCountText(forLink link: Link) -> String {
+        
         return (link.commentsCount == 1 ?
             "\(link.commentsCount) comment" :
             "\(link.commentsCount) comments")

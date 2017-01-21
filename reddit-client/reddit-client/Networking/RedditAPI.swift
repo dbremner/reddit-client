@@ -83,11 +83,11 @@ class RedditAPI: NSObject {
             var newLinks = Set<Link>()
             
             if let data = response["data"] as? Payload {
-            
+                
                 if let children = data["children"] as? List {
-            
+    
                     var sortValue = count
-                    
+    
                     for child in children {
                 
                         if let childData = child["data"] as? Payload {
