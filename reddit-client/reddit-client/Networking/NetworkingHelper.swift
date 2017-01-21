@@ -22,6 +22,8 @@ class NetworkingHelper: NSObject {
                              params: [String: String],
                              completionHandler: @escaping ((Payload?, Error?) -> Void)) {
     
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
         let url = NetworkingHelper.appendParams(url: url, params: params)
        
         print("GET: \(url)")
@@ -29,6 +31,8 @@ class NetworkingHelper: NSObject {
         let request = URLRequest(url: url)
         
         let dataTask = self.sharedSession.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             
             if error != nil {
                 completionHandler(nil, error)
