@@ -12,33 +12,44 @@ typealias CompletionClosure = ((URL?, Error?) -> Void)
 
 class UIRemoteImageView: UIImageView {
 
+    var spinner: UIActivityIndicatorView?
     var currentContentURL: URL?
     
     func setContent(url: URL?) {
+        
         if self.refreshContent(forNewUrl: url) {
+           
             self.cleanCurrentConfiguration()
             if let url = url {
+                
                 self.currentContentURL = url
-            
                 if let image = self.cachedImage(forRemoteUrl: url) {
                     self.image = image
                 } else {
+                    
+                    self.presentLoadingMode()
+
                     let localUrl = self.localCachedImageUrl(forRemoteUrl: url)
-                    NetworkingHelper.sharedInstance.executeDownloadContent(atUrl: url, saveAtUrl: localUrl, completionHandler: { (remoteUrl: URL, downloadedUrl: URL?, error: Error?) in
+                    
+                    NetworkingHelper.sharedInstance.executeDownloadContent(atUrl: url, saveAtUrl: localUrl) { (remoteUrl: URL, downloadedUrl: URL?, error: Error?) in
                         
-                        if error != nil {
-                            self.presentErrorMode()
-                        } else {
+                        if error == nil {
                             FileSystemHelper.sharedInstance.copyFile(atUrl: downloadedUrl!,
                                                                      toUrl: localUrl)
-                            DispatchQueue.main.async {
+                        }
+                                                                            
+                        DispatchQueue.main.async {
+                            self.removeLoadingMode()
+                            if error != nil {
+                                self.presentErrorMode()
+                            } else {
                                 if let currentUrl = self.currentContentURL, currentUrl == url {
                                     print("downloaded \(url) to \(localUrl)")
                                     self.image = self.cachedImage(forRemoteUrl: url)!
                                 }
                             }
                         }
-                    })
+                    }
                 }
             }
         }
@@ -81,14 +92,33 @@ class UIRemoteImageView: UIImageView {
     private func cleanCurrentConfiguration() {
         self.currentContentURL = nil
         self.image = nil
+        self.removeLoadingMode()
     }
     
     private func presentLoadingMode() {
         self.image = nil
+        
+        if self.spinner == nil
+        {
+            let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            self.addSubview(spinner)
+            spinner.startAnimating()
+            spinner.center = CGPoint(x: self.bounds.size.width / 2.0,
+                                     y: self.bounds.size.height / 2.0)
+            self.spinner = spinner
+        }
+    }
+    
+    private func removeLoadingMode() {
+        if let spinner = self.spinner {
+            spinner.removeFromSuperview()
+        }
+        self.spinner = nil
     }
     
     private func presentErrorMode() {
         self.image = nil
+        self.removeLoadingMode()
     }
     
 }
