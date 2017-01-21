@@ -1,7 +1,10 @@
 # reddit-client
 
-** Still in development, not completed **
 
 This is a simple reddit client written in Swift 3 that shows Top feed.
 
-It uses new Core Data features presented with iOS 10.
+It doesn't use any third party code.
+
+It implements last Core Data features presented with iOS 10.
+
+It has a class UIRemoteImageView for downloading and caching remote images.
