@@ -67,3 +67,5 @@ fastlane/test_output
 /reddit-client/.DS_Store
 
 /reddit-client/reddit-client/.DS_Store
+
+/reddit-client/reddit-client/Feed/.DS_Store

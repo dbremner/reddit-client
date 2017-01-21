@@ -63,6 +63,18 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
         }
     }
     
+    
+     // MARK: - Navigation
+     
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+   
+        if segue.identifier == "showLinkDetails" {
+            let vc = segue.destination as! LinkDetailsViewController
+            let link = sender as! Link
+            vc.link = link
+        }
+     }
+
   
     // MARK: - Table view
     
@@ -102,6 +114,11 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
                             heightForRowAt indexPath: IndexPath) -> CGFloat {
         let link = self.fetchedResultsController.object(at: indexPath)
         return LinkCell.neededHeight(forLink: link)
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let link = self.fetchedResultsController.object(at: indexPath)
+        self.performSegue(withIdentifier: "showLinkDetails", sender: link)
     }
     
     // MARK: - Fetched results controller

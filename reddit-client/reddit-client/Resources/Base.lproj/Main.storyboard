@@ -150,11 +150,45 @@
                     </refreshControl>
                     <connections>
                         <outlet property="loadMoreView" destination="1UT-U5-Vt3" id="ilB-Mw-0y8"/>
+                        <segue destination="1P0-eZ-9oX" kind="show" identifier="showLinkDetails" id="pQl-tw-9Cq"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1U3-4o-el7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="551.25" y="186.97183098591549"/>
+        </scene>
+        <!--Link Details View Controller-->
+        <scene sceneID="WBJ-Ms-wIO">
+            <objects>
+                <viewController id="1P0-eZ-9oX" customClass="LinkDetailsViewController" customModule="reddit_client" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LCF-e1-IBP"/>
+                        <viewControllerLayoutGuide type="bottom" id="TQV-MB-yrc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2qB-jh-jZS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vJ8-RW-9eZ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="TQV-MB-yrc" firstAttribute="top" secondItem="vJ8-RW-9eZ" secondAttribute="bottom" id="3iX-rP-4ki"/>
+                            <constraint firstItem="vJ8-RW-9eZ" firstAttribute="leading" secondItem="2qB-jh-jZS" secondAttribute="leading" id="AUR-AS-zh0"/>
+                            <constraint firstAttribute="trailing" secondItem="vJ8-RW-9eZ" secondAttribute="trailing" id="mzS-tr-BrQ"/>
+                            <constraint firstItem="vJ8-RW-9eZ" firstAttribute="top" secondItem="2qB-jh-jZS" secondAttribute="top" id="qJl-mx-JdY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="vJ8-RW-9eZ" id="ieR-g0-lde"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CQj-XC-hTg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1359.375" y="186.97183098591549"/>
         </scene>
     </scenes>
 </document>

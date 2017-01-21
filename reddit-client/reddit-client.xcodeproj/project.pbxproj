@@ -26,6 +26,7 @@
 		E7E4A5D91E3269FA002D7DB3 /* FileSystemHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E4A5D81E3269FA002D7DB3 /* FileSystemHelper.swift */; };
 		E7E4A5DB1E32B4CF002D7DB3 /* LoadMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E4A5DA1E32B4CF002D7DB3 /* LoadMoreView.swift */; };
 		E7E4A5DD1E32B917002D7DB3 /* UIAlertController+Simplified.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E4A5DC1E32B917002D7DB3 /* UIAlertController+Simplified.swift */; };
+		E7E4A5E01E32DCF1002D7DB3 /* LinkDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E4A5DF1E32DCF1002D7DB3 /* LinkDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		E7E4A5D81E3269FA002D7DB3 /* FileSystemHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystemHelper.swift; sourceTree = "<group>"; };
 		E7E4A5DA1E32B4CF002D7DB3 /* LoadMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreView.swift; sourceTree = "<group>"; };
 		E7E4A5DC1E32B917002D7DB3 /* UIAlertController+Simplified.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Simplified.swift"; sourceTree = "<group>"; };
+		E7E4A5DF1E32DCF1002D7DB3 /* LinkDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 			children = (
 				E76446BE1E303D5B00FEF492 /* AppDelegate.swift */,
 				E7E4A5BF1E3160EF002D7DB3 /* Feed */,
+				E7E4A5DE1E32DCDF002D7DB3 /* Link Details */,
 				E76446D11E303DBF00FEF492 /* Helpers */,
 				E76446D21E303DBF00FEF492 /* Model */,
 				E76446E11E30E6E500FEF492 /* Networking */,
@@ -155,6 +158,14 @@
 				E7E4A5DA1E32B4CF002D7DB3 /* LoadMoreView.swift */,
 			);
 			path = Feed;
+			sourceTree = "<group>";
+		};
+		E7E4A5DE1E32DCDF002D7DB3 /* Link Details */ = {
+			isa = PBXGroup;
+			children = (
+				E7E4A5DF1E32DCF1002D7DB3 /* LinkDetailsViewController.swift */,
+			);
+			path = "Link Details";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,6 +255,7 @@
 				E7E4A5C11E3160EF002D7DB3 /* FeedViewController.swift in Sources */,
 				E7E4A5CD1E317FD5002D7DB3 /* NSDate+FriendlyDescription.swift in Sources */,
 				E7E4A5DD1E32B917002D7DB3 /* UIAlertController+Simplified.swift in Sources */,
+				E7E4A5E01E32DCF1002D7DB3 /* LinkDetailsViewController.swift in Sources */,
 				E76447121E31256900FEF492 /* Model.xcdatamodeld in Sources */,
 				E7E4A5DB1E32B4CF002D7DB3 /* LoadMoreView.swift in Sources */,
 			);
