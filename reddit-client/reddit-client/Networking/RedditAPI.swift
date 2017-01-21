@@ -43,16 +43,20 @@ class RedditAPI: NSObject {
         params["raw_json"] = "1"
         params["sort"] = "top"
         
-        NetworkingHelper.sharedInstance.executeGETOperation(url,
-                                                            params: params) { (response: Payload?, error: Error?) in
+        NetworkingHelper.sharedInstance.executeGETOperation(url, params: params) { (response: Payload?, error: Error?) in
+            
             if error != nil {
-                completionHandler(error)
+                DispatchQueue.main.async {
+                    completionHandler(error)
+                }
             } else {
                 self.processLinksResponse(response: response!,
                                           resetLocalData: (after == nil),
                                           count: count,
                                           completionHandler: {
-                    completionHandler(nil)
+                    DispatchQueue.main.async {
+                        completionHandler(nil)
+                    }
                 })
             }
         }
@@ -112,9 +116,7 @@ class RedditAPI: NSObject {
             
             try! context.save()
             
-            DispatchQueue.main.async {
-                completionHandler()
-            }
+            completionHandler()
         }
     }
 }
