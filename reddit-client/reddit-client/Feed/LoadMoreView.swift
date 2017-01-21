@@ -30,6 +30,6 @@ class LoadMoreView: UIView {
             loadNextPageHandler()
         }
     }
-    
+ 
 }
 

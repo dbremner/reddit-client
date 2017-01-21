@@ -187,8 +187,9 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
         
         case .update:
             let link = anObject as! Link
-            let cell = tableView.cellForRow(at: indexPath!) as! LinkCell
-            cell.update(withLink: link)
+            if let cell = tableView.cellForRow(at: indexPath!) as? LinkCell {
+                cell.update(withLink: link)
+            }
             
         case .move:
             tableView.moveRow(at: indexPath!, to: newIndexPath!)
@@ -200,4 +201,32 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
         self.tableView.endUpdates()
     }
 
+    // MARK: Restoration
+    
+    override func encodeRestorableState(with coder: NSCoder) {
+        
+        // Encode current selected link
+        if let indexPath = self.tableView.indexPathForSelectedRow {
+            let link = self.fetchedResultsController.object(at: indexPath)
+            coder.encode(link.identifier)
+        }
+        
+        super.encodeRestorableState(with: coder)
+    }
+    
+    override func decodeRestorableState(with coder: NSCoder) {
+        super.decodeRestorableState(with: coder)
+        
+        if let linkIdentifier = coder.decodeObject() as? String {
+            let context = DataHelper.sharedInstance.viewContext()
+            if let link = Link.find(withIdentifier: linkIdentifier,
+                                    context: context) {
+                if let indexPath = self.fetchedResultsController.indexPath(forObject: link) {
+                    self.tableView.selectRow(at: indexPath,
+                                             animated: false,
+                                             scrollPosition: .middle)
+                }
+            }
+        }
+    }
 }

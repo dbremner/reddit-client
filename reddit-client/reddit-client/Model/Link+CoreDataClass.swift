@@ -45,6 +45,23 @@ public class Link: NSManagedObject {
         return searchResults?.first
     }
     
+    static func findAll(context: NSManagedObjectContext) -> [Link] {
+        
+        let request: NSFetchRequest<Link> = Link.fetchRequest()
+        
+        var searchResults: Array<Link>?
+        
+        context.performAndWait {
+            do {
+                searchResults = try context.fetch(request)
+            } catch {
+                fatalError("Error with request: \(error)")
+            }
+        }
+        
+        return searchResults ?? [Link]()
+    }
+    
     static func count(context: NSManagedObjectContext) -> Int {
         
         let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Link")

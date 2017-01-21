@@ -13,7 +13,7 @@
         <!--Navigation Controller-->
         <scene sceneID="8jT-gs-VKs">
             <objects>
-                <navigationController id="jur-Wd-yQF" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jur-Wd-yQF" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="XNx-cc-6XZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -29,7 +29,7 @@
         <!--Feed View Controller-->
         <scene sceneID="DtI-qk-nOT">
             <objects>
-                <tableViewController id="Pbk-gb-ktg" customClass="FeedViewController" customModule="reddit_client" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="FeedViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Pbk-gb-ktg" customClass="FeedViewController" customModule="reddit_client" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="gjj-R6-yq2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -146,6 +146,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="a1i-Ye-gaH"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="NK9-La-bWX">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
@@ -160,7 +161,7 @@
         <!--Link Details View Controller-->
         <scene sceneID="WBJ-Ms-wIO">
             <objects>
-                <viewController id="1P0-eZ-9oX" customClass="LinkDetailsViewController" customModule="reddit_client" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LinkDetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1P0-eZ-9oX" customClass="LinkDetailsViewController" customModule="reddit_client" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LCF-e1-IBP"/>
                         <viewControllerLayoutGuide type="bottom" id="TQV-MB-yrc"/>
