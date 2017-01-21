@@ -16,6 +16,8 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = "reddit"
+        
         self.setupTableView()
         self.requestFirstPage()
     }
