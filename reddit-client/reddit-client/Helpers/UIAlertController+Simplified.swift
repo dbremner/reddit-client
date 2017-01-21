@@ -14,19 +14,15 @@ extension UIAlertController {
     static func presentAlert(withError error: Error,
                              overViewController vc: UIViewController) {
         
-        let alertController = UIAlertController(title: "Error",
+        let alertController = UIAlertController(title: nil,
                                                 message: error.localizedDescription,
                                                 preferredStyle: .alert)
+      
+        let okButton = UIAlertAction(title: "OK",
+                                     style: .cancel,
+                                     handler: nil)
         
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { action in
-//            println(action)
-//        }
-//        alertController.addAction(cancelAction)
-//        
-//        let destroyAction = UIAlertAction(title: "Destroy", style: .Destructive) { action in
-//            println(action)
-//        }
-//        alertController.addAction(destroyAction)
+        alertController.addAction(okButton)
         
         vc.present(alertController, animated: true, completion: nil)
     }

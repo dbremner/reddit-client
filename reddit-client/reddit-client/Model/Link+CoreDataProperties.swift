@@ -18,6 +18,7 @@ extension Link {
 
     @NSManaged public var author: String?
     @NSManaged public var commentsCount: Int64
+    @NSManaged public var contentType: Int16
     @NSManaged public var createdAt: NSDate?
     @NSManaged public var identifier: String?
     @NSManaged public var thumbnail: String?

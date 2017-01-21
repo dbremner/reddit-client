@@ -9,6 +9,14 @@
 import Foundation
 import CoreData
 
+enum LinkContentType: Int16 {
+    case embeddedVideo = 1
+    case image = 2
+    case link = 3
+    
+    case unknown = -1
+}
+
 @objc(Link)
 public class Link: NSManagedObject {
     
@@ -165,6 +173,27 @@ public class Link: NSManagedObject {
         } else {
             self.url = nil
         }
+        
+        var contentType: LinkContentType?
+        
+        if let postHint = dictionary["post_hint"] as? String {
+            switch postHint {
+            case "image":
+                contentType = .image
+            case "link":
+                contentType = .link
+            case "rich:video":
+                contentType = .embeddedVideo
+
+            default:
+                contentType = .unknown
+            }
+        }
+        else {
+            contentType = .unknown
+        }
+        
+        self.contentType = contentType!.rawValue
     }
     
     func hasThumbnail() -> Bool {

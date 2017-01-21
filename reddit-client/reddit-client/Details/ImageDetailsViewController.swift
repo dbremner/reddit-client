@@ -1,5 +1,5 @@
 //
-//  LinkDetailsViewController.swift
+//  ImageDetailsViewController.swift
 //  reddit-client
 //
 //  Created by Pablo Romero on 1/20/17.
@@ -7,59 +7,31 @@
 //
 
 import UIKit
-import WebKit
 
-class LinkDetailsViewController: UIViewController {
+class ImageDetailsViewController: DetailsViewController {
 
-    var webView: WKWebView!
+    @IBOutlet weak var imageView: UIRemoteImageView!
     
-    var link: Link?
-    var currentURL: URL?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        self.setupWebView()
-        
-        if let link = self.link {
-            let urlString = link.url!
-            let url = URL(string: urlString)!
-            
-            self.setup(withUrl: url)
-        }
-    }
-
-    func setupWebView() {
-        let webConfiguration = WKWebViewConfiguration()
-        self.webView = WKWebView(frame: self.view.bounds, configuration: webConfiguration)
-//        webView.uiDelegate = self
-        self.view.addSubview(self.webView)
-        view = webView
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.title = "Image"
     }
     
-    func setup(withUrl url: URL) {
-        self.title = url.host
-        let request = URLRequest(url: url)
-        self.webView.load(request)
-        self.currentURL = url
+    override func setup(withUrl url: URL) {
+        self.title = "image"
+        self.imageView.setContent(url: url)
     }
     
-    // MARK: Restoration
-    
-    override func encodeRestorableState(with coder: NSCoder) {
-        
-        if let url = self.currentURL {
-            coder.encode(url)
-        }
-            
-        super.encodeRestorableState(with: coder)
+    override func contentForActivityViewController() -> [Any] {
+        return [self.imageView.image!]
     }
     
-    override func decodeRestorableState(with coder: NSCoder) {
-        super.decodeRestorableState(with: coder)
-    
-        if let url = coder.decodeObject() as? URL {
-            self.setup(withUrl: url)
+    override func checkIfContentIsReadyForActivityViewController() throws {
+        if self.imageView.image == nil {
+            let error = NSError(domain: "DetailsContent",
+                                code: 0,
+                                userInfo: [NSLocalizedDescriptionKey: "Content not available yet"])
+            throw error
         }
     }
 }

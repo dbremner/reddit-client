@@ -152,6 +152,7 @@
                     <connections>
                         <outlet property="loadMoreView" destination="1UT-U5-Vt3" id="ilB-Mw-0y8"/>
                         <segue destination="1P0-eZ-9oX" kind="show" identifier="showLinkDetails" id="pQl-tw-9Cq"/>
+                        <segue destination="UW6-WQ-av3" kind="show" identifier="showImageDetails" id="fmy-Rc-eFU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1U3-4o-el7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -169,27 +170,58 @@
                     <view key="view" contentMode="scaleToFill" id="2qB-jh-jZS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vJ8-RW-9eZ">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="TQV-MB-yrc" firstAttribute="top" secondItem="vJ8-RW-9eZ" secondAttribute="bottom" id="3iX-rP-4ki"/>
-                            <constraint firstItem="vJ8-RW-9eZ" firstAttribute="leading" secondItem="2qB-jh-jZS" secondAttribute="leading" id="AUR-AS-zh0"/>
-                            <constraint firstAttribute="trailing" secondItem="vJ8-RW-9eZ" secondAttribute="trailing" id="mzS-tr-BrQ"/>
-                            <constraint firstItem="vJ8-RW-9eZ" firstAttribute="top" secondItem="2qB-jh-jZS" secondAttribute="top" id="qJl-mx-JdY"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="webView" destination="vJ8-RW-9eZ" id="ieR-g0-lde"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="lc5-Uo-HBz">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="7Lx-P4-JA6">
+                            <connections>
+                                <action selector="shareButtonTouched:" destination="1P0-eZ-9oX" id="I5d-fr-Pz6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CQj-XC-hTg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1359.375" y="186.97183098591549"/>
+            <point key="canvasLocation" x="1796" y="-271"/>
+        </scene>
+        <!--Image Details View Controller-->
+        <scene sceneID="mdw-JP-1e0">
+            <objects>
+                <viewController id="UW6-WQ-av3" customClass="ImageDetailsViewController" customModule="reddit_client" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dV6-KI-jjL"/>
+                        <viewControllerLayoutGuide type="bottom" id="tNB-kE-MKy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QjE-BA-XZf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JFm-1g-YQQ" customClass="UIRemoteImageView" customModule="reddit_client" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="JFm-1g-YQQ" firstAttribute="leading" secondItem="QjE-BA-XZf" secondAttribute="leading" id="1NB-lm-OQ4"/>
+                            <constraint firstItem="JFm-1g-YQQ" firstAttribute="top" secondItem="dV6-KI-jjL" secondAttribute="bottom" id="5EP-aO-iBf"/>
+                            <constraint firstItem="tNB-kE-MKy" firstAttribute="top" secondItem="JFm-1g-YQQ" secondAttribute="bottom" id="bKk-Lt-pHq"/>
+                            <constraint firstAttribute="trailing" secondItem="JFm-1g-YQQ" secondAttribute="trailing" id="vES-xB-2PW"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="BdB-Hb-i4a">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="eFS-Ui-ctg">
+                            <connections>
+                                <action selector="shareButtonTouched:" destination="UW6-WQ-av3" id="Ch0-jR-4Bg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="JFm-1g-YQQ" id="Og9-3u-GBM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C5x-u3-zfI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1800" y="494"/>
         </scene>
     </scenes>
 </document>

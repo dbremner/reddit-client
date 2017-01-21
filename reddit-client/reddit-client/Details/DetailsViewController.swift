@@ -1,5 +1,5 @@
 //
-//  LinkDetailsViewController.swift
+//  DetailsViewController.swift
 //  reddit-client
 //
 //  Created by Pablo Romero on 1/20/17.
@@ -7,41 +7,52 @@
 //
 
 import UIKit
-import WebKit
 
-class LinkDetailsViewController: UIViewController {
+enum DetailsContentError: Error {
+    case contentNotAvailableYet
+}
 
-    var webView: WKWebView!
-    
-    var link: Link?
+class DetailsViewController: UIViewController {
+
     var currentURL: URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.setupWebView()
-        
-        if let link = self.link {
-            let urlString = link.url!
-            let url = URL(string: urlString)!
-            
-            self.setup(withUrl: url)
+        if let currentURL = self.currentURL {
+            self.setup(withUrl: currentURL)
         }
-    }
-
-    func setupWebView() {
-        let webConfiguration = WKWebViewConfiguration()
-        self.webView = WKWebView(frame: self.view.bounds, configuration: webConfiguration)
-//        webView.uiDelegate = self
-        self.view.addSubview(self.webView)
-        view = webView
     }
     
     func setup(withUrl url: URL) {
-        self.title = url.host
-        let request = URLRequest(url: url)
-        self.webView.load(request)
-        self.currentURL = url
+        // Override!
+    }
+    
+    // MARK: share
+    
+    func presentActivityViewController(forContent content: [Any]) {
+        let vc = UIActivityViewController(activityItems: content, applicationActivities: [])
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    func contentForActivityViewController() -> [Any] {
+        // Override!
+        return [Any]()
+    }
+    
+    func checkIfContentIsReadyForActivityViewController() throws {
+        // Override!
+    }
+    
+    @IBAction func shareButtonTouched(_ sender: UIBarButtonItem) {
+        
+        do {
+            try self.checkIfContentIsReadyForActivityViewController()
+            self.presentActivityViewController(forContent: self.contentForActivityViewController())
+        } catch {
+            UIAlertController.presentAlert(withError: error,
+                                           overViewController: self)
+        }
     }
     
     // MARK: Restoration

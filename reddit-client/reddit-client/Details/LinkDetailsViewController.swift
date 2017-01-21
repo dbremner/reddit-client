@@ -9,57 +9,29 @@
 import UIKit
 import WebKit
 
-class LinkDetailsViewController: UIViewController {
+class LinkDetailsViewController: DetailsViewController {
 
     var webView: WKWebView!
     
-    var link: Link?
-    var currentURL: URL?
-    
     override func viewDidLoad() {
-        super.viewDidLoad()
-
         self.setupWebView()
-        
-        if let link = self.link {
-            let urlString = link.url!
-            let url = URL(string: urlString)!
-            
-            self.setup(withUrl: url)
-        }
+        super.viewDidLoad()
     }
 
     func setupWebView() {
         let webConfiguration = WKWebViewConfiguration()
         self.webView = WKWebView(frame: self.view.bounds, configuration: webConfiguration)
-//        webView.uiDelegate = self
         self.view.addSubview(self.webView)
-        view = webView
     }
     
-    func setup(withUrl url: URL) {
+    override func setup(withUrl url: URL) {
         self.title = url.host
         let request = URLRequest(url: url)
         self.webView.load(request)
         self.currentURL = url
     }
     
-    // MARK: Restoration
-    
-    override func encodeRestorableState(with coder: NSCoder) {
-        
-        if let url = self.currentURL {
-            coder.encode(url)
-        }
-            
-        super.encodeRestorableState(with: coder)
-    }
-    
-    override func decodeRestorableState(with coder: NSCoder) {
-        super.decodeRestorableState(with: coder)
-    
-        if let url = coder.decodeObject() as? URL {
-            self.setup(withUrl: url)
-        }
+    override func contentForActivityViewController() -> [Any] {
+        return [NSURL(string: (self.currentURL?.absoluteString)!)!]
     }
 }

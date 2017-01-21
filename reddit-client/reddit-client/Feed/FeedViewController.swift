@@ -67,13 +67,31 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
     
     
      // MARK: - Navigation
-     
+    
+    func showDatilsViewController(forLink link: Link) {
+       
+        let contentType: LinkContentType = LinkContentType(rawValue: link.contentType)!
+        
+        switch contentType {
+        case .unknown, .embeddedVideo, .link:
+            self.performSegue(withIdentifier: "showLinkDetails", sender: link.url)
+        case .image:
+            self.performSegue(withIdentifier: "showImageDetails", sender: link.url)
+            
+        }
+        
+    }
+    
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
    
-        if segue.identifier == "showLinkDetails" {
-            let vc = segue.destination as! LinkDetailsViewController
-            let link = sender as! Link
-            vc.link = link
+        if segue.identifier == "showLinkDetails" ||
+           segue.identifier == "showImageDetails" {
+            
+            let vc = segue.destination as! DetailsViewController
+            let urlString = sender as! String
+            
+            let url = URL(string: urlString)!
+            vc.currentURL = url
         }
      }
 
@@ -120,7 +138,7 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let link = self.fetchedResultsController.object(at: indexPath)
-        self.performSegue(withIdentifier: "showLinkDetails", sender: link)
+        self.showDatilsViewController(forLink: link)
     }
     
     // MARK: - Fetched results controller
