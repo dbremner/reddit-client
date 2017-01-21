@@ -102,9 +102,16 @@ class UIRemoteImageView: UIImageView {
         {
             let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
             self.addSubview(spinner)
+           
             spinner.startAnimating()
             spinner.center = CGPoint(x: self.bounds.size.width / 2.0,
                                      y: self.bounds.size.height / 2.0)
+            
+            spinner.autoresizingMask = [.flexibleBottomMargin,
+                                        .flexibleLeftMargin,
+                                        .flexibleRightMargin,
+                                        .flexibleTopMargin]
+            
             self.spinner = spinner
         }
     }
