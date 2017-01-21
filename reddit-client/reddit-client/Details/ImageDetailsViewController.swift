@@ -18,7 +18,6 @@ class ImageDetailsViewController: DetailsViewController {
     }
     
     override func setup(withUrl url: URL) {
-        self.title = "image"
         self.imageView.setContent(url: url)
     }
     
