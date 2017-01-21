@@ -11,7 +11,7 @@ import CoreData
 
 class FeedViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
-    @IBOutlet weak var loadMoreView: LoadMoreView!
+    @IBOutlet var loadMoreView: LoadMoreView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +40,7 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
         RedditAPI.sharedInstance.top { (error: Error?) in
          
             self.loadMoreView.setLoadingMode(false)
+            self.refreshTableViewFooter()
             
             if let refreshControl = self.refreshControl {
                 refreshControl.endRefreshing()
@@ -55,9 +56,13 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
     func requestNextPage() {
         
         self.loadMoreView.setLoadingMode(true)
+        self.refreshControl?.isEnabled = false
         
         RedditAPI.sharedInstance.nextPage { (error: Error?) in
+       
             self.loadMoreView.setLoadingMode(false)
+            self.refreshControl?.isEnabled = true
+            
             if let error = error {
                 UIAlertController.presentAlert(withError: error,
                                                overViewController: self)
@@ -100,11 +105,11 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
     
     func setupTableView() {
         
-        self.tableView.tableFooterView = self.loadMoreView
-        
-        self.loadMoreView.loadNextPageHandler = {
+        self.loadMoreView.loadHandler = {
             self.requestNextPage()
         }
+        
+        self.refreshTableViewFooter()
         
         self.refreshControl?.addTarget(self,
                                        action: #selector(FeedViewController.handleRefresh(refreshControl:)),
@@ -139,6 +144,15 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let link = self.fetchedResultsController.object(at: indexPath)
         self.showDatilsViewController(forLink: link)
+    }
+    
+    func refreshTableViewFooter() {
+        let context = DataHelper.sharedInstance.viewContext()
+        if Link.isEmpty(context: context) {
+            self.tableView.tableFooterView = nil
+        } else {
+            self.tableView.tableFooterView = self.loadMoreView
+        }
     }
     
     // MARK: - Fetched results controller
@@ -221,7 +235,7 @@ class FeedViewController: UITableViewController, NSFetchedResultsControllerDeleg
         self.tableView.endUpdates()
     }
 
-    // MARK: Restoration
+    // MARK: - Restoration
     
     override func encodeRestorableState(with coder: NSCoder) {
         

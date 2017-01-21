@@ -107,6 +107,29 @@ public class Link: NSManagedObject {
         return (searchResults?.first)!
     }
     
+    static func isEmpty(context: NSManagedObjectContext) -> Bool {
+        
+        let request: NSFetchRequest<Link> = Link.fetchRequest()
+        
+        request.fetchLimit = 1
+        
+        var searchResults: Array<Link>?
+        
+        context.performAndWait {
+            do {
+                searchResults = try context.fetch(request)
+            } catch {
+                fatalError("Error with request: \(error)")
+            }
+        }
+        
+        if let searchResults = searchResults {
+            return searchResults.count == 0
+        } else {
+            return true
+        }
+    }
+    
     static func deleteAll(context: NSManagedObjectContext) {
         
         let request: NSFetchRequest<Link> = Link.fetchRequest()

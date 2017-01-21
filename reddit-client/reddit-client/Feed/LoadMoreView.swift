@@ -13,7 +13,7 @@ class LoadMoreView: UIView {
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
-    var loadNextPageHandler: ((Void) -> Void)?
+    var loadHandler: ((Void) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,8 +26,8 @@ class LoadMoreView: UIView {
     }
     
     @IBAction func buttonTouched(sender: UIButton) {
-        if let loadNextPageHandler = self.loadNextPageHandler {
-            loadNextPageHandler()
+        if let loadHandler = self.loadHandler {
+            loadHandler()
         }
     }
  
