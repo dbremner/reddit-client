@@ -50,6 +50,7 @@ class RedditAPI: NSObject {
             } else {
                 self.processLinksResponse(response: response!,
                                           resetLocalData: (after == nil),
+                                          count: count,
                                           completionHandler: {
                     completionHandler(nil)
                 })
@@ -70,6 +71,7 @@ class RedditAPI: NSObject {
     
     private func processLinksResponse(response: Payload,
                                       resetLocalData: Bool,
+                                      count: Int,
                                       completionHandler: @escaping ((Void) -> Void)) {
         
         DataHelper.sharedInstance.performBackgroundTask { (context: NSManagedObjectContext) in
@@ -80,7 +82,7 @@ class RedditAPI: NSObject {
             
                 if let children = data["children"] as? List {
             
-                    var sortValue: Int = Link.count(context: context)
+                    var sortValue = count
                     
                     for child in children {
                 
