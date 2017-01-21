@@ -74,9 +74,7 @@ class RedditAPI: NSObject {
         
         DataHelper.sharedInstance.performBackgroundTask { (context: NSManagedObjectContext) in
             
-            if resetLocalData {
-                Link.deleteAll(context: context)
-            }
+            var newLinks = Set<Link>()
             
             if let data = response["data"] as? Payload {
             
@@ -91,7 +89,21 @@ class RedditAPI: NSObject {
                                                    context: context)
                             link.sortValue = Int32(sortValue)
                             sortValue += 1
+                            
+                            newLinks.insert(link)
                         }
+                    }
+                }
+            }
+            
+            if (resetLocalData)
+            {
+                // Remove only the ones that aren't in the news set
+                let links = Link.findAll(context: context)
+                
+                for link in links {
+                    if !newLinks.contains(link) {
+                        context.delete(link)
                     }
                 }
             }
