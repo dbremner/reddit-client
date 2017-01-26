@@ -30,7 +30,7 @@ public class Link: NSManagedObject {
             link = Link(context: context)
         }
 
-        link?.update(withIdentifier: dictionary)
+        link?.update(withDictonary: dictionary)
         return link!
     }
     
@@ -153,7 +153,7 @@ public class Link: NSManagedObject {
         return dictionary["name"] as! String
     }
     
-    func update(withIdentifier dictionary: [String: Any]) {
+    func update(withDictonary dictionary: [String: Any]) {
         
         if let title = dictionary["title"] as? String {
             self.title = title

@@ -31,13 +31,7 @@ class UIRemoteImageView: UIImageView {
 
                     let localUrl = self.localCachedImageUrl(forRemoteUrl: url)
                     
-                    NetworkingHelper.sharedInstance.executeDownloadContent(atUrl: url, saveAtUrl: localUrl) { (remoteUrl: URL, downloadedUrl: URL?, error: Error?) in
-                        
-                        if error == nil {
-                            FileSystemHelper.sharedInstance.copyFile(atUrl: downloadedUrl!,
-                                                                     toUrl: localUrl)
-                        }
-                                                                            
+                    NetworkingHelper.sharedInstance.downloadContent(fromUrl: url, to: localUrl) { (remoteUrl: URL, localUrl: URL, error: Error?) in
                         DispatchQueue.main.async {
                             self.removeLoadingMode()
                             if error != nil {
@@ -80,7 +74,7 @@ class UIRemoteImageView: UIImageView {
     }
     
     private func localCachedImageUrl(forRemoteUrl url: URL) -> URL {
-        var localURL = FileSystemHelper.cachesPath()
+        var localURL = FileSystemHelper.cachesUrl()
         localURL.appendPathComponent(url.md5Hash())
         return localURL
     }

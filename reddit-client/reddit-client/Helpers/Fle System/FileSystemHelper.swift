@@ -25,7 +25,7 @@ class FileSystemHelper: NSObject {
         try! self.fileManager.copyItem(at: atUrl, to: toUrl)
     }
     
-    static func cachesPath() -> URL {
+    static func cachesUrl() -> URL {
         let paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true) as [String]
         let path = paths.first!
         return URL(fileURLWithPath: path)

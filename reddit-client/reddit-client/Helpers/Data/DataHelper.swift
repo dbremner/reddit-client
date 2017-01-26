@@ -15,8 +15,8 @@ class DataHelper: NSObject {
     
     private lazy var persistentContainer: NSPersistentContainer = {
      
-        let modelURL = Bundle.main.url(forResource: "Model.momd/Model.mom", withExtension: nil)
-        let model = NSManagedObjectModel(contentsOf: modelURL!)!
+        let modelURL = Bundle.main.url(forResource: "Model.momd/Model.mom", withExtension: nil)!
+        let model = NSManagedObjectModel(contentsOf: modelURL)!
         let container = NSPersistentContainer(name: "reddit-client", managedObjectModel: model)
         
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -37,26 +37,7 @@ class DataHelper: NSObject {
         return self.persistentContainer.viewContext
     }
     
-    func newBackgroundContext() -> NSManagedObjectContext {
-        return self.persistentContainer.newBackgroundContext()
-    }
-    
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
         self.persistentContainer.performBackgroundTask(block)
-    }
-
-    func save () {
-        
-        let context = persistentContainer.viewContext
-        
-        if context.hasChanges {
-            
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
     }
 }

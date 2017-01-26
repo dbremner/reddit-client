@@ -80,12 +80,18 @@ class NetworkingHelper: NSObject {
     
     // MARK: - Download
     
-    func executeDownloadContent(atUrl url: URL,
-                                saveAtUrl: URL,
-                                completionHandler: @escaping (URL, URL?, Error?) -> Void) {
+    func downloadContent(fromUrl url: URL,
+                         to localUrl: URL,
+                         completionHandler: @escaping (URL, URL, Error?) -> Void) {
         
         let downloadTask = self.sharedSession.downloadTask(with: url) { (downloadedUrl: URL?, response: URLResponse?, error: Error?) in
-            completionHandler(url, downloadedUrl, error)
+            
+            if error == nil {
+                FileSystemHelper.sharedInstance.copyFile(atUrl: downloadedUrl!,
+                                                         toUrl: localUrl)
+            }
+            
+            completionHandler(url, localUrl, error)
         }
         
         downloadTask.resume()
